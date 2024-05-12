@@ -1,5 +1,6 @@
 #!/bin/bash
 
+OPTSTRING=":aV:rV:hv"
 VERSION="0.0.1"
 
 #check for root
@@ -8,20 +9,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-#option for adding a package with no version
-if [ $0 == "-a" ]; then
-    echo $1 " 0.0" >> /var/lib/soupy/list
-    echo "Added " $1 " 0.0"
-fi
-
-#option for adding a package with version
-if [ $0 == "-a" && $2 == "-v" ]; then
-    echo $1 " " $3 >> /var/lib/soupy/list
-    echo "Added " $1 " " $3
-fi
-
-#option for giving version number
-if [ $0 == "-V" || $0 == "-v" ]; then
-    echo $VERSION
-fi
-
+while getopts $OPTSTRING opt; do
+    case $opt in
+        a)
+            echo $OPTARG >> 
